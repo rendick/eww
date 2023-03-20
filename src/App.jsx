@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Web3 from 'web3';
+import Header from './Components/Header/Header';
 import './App.scss';
 
 function App() {
   const [address, setAddress] = useState('');
   const [balance, setBalance] = useState(0);
+
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -23,20 +25,27 @@ function App() {
       console.log('error');
     }
 
-    if (address){
-      document.querySelector('.btn').remove();
-    } else{
+    if (address) { } else {
       document.querySelector('.btn').remove();
     }
+
   };
+
+
 
   return (
     <div className="App">
-      <h1>Web Crypto Wallet</h1>
-      <p>Address: {address}</p>
-      <p>Balance: {balance} ETH</p>
-      <button onClick={connectWallet} className='btn'>Connect Wallet</button>
-      <p className='alert'></p>
+      <Header />
+      <div className='balance'>
+        <div className='balance-text'>
+          <h1>Hello Wallet</h1>
+          {/* <p className='address' style={{color: '#fff'}}>Address: {address}</p> */}
+          <p className='address' id='address'>Address: {address}</p>
+          <p>Balance: {balance} ETH</p>
+          <button onClick={connectWallet} className='btn'>Connect Wallet</button>
+          <p className='alert'></p>
+        </div>
+      </div>
     </div>
   );
 }
